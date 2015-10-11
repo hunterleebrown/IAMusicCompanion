@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     _titleLabel.text = self.searchDoc.title;
     [_itemImageView setImageWithURL:[NSURL URLWithString:self.searchDoc.itemImageUrl]];
@@ -43,6 +44,10 @@
         }
         
     }];
+    
+    UIFontDescriptor *userFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
+    float userFontSize = [userFont pointSize];
+    UIFont *font = [UIFont fontWithName:@"ArialHebrew-Bold" size:userFontSize];
     
 }
 

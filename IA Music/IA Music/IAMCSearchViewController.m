@@ -38,8 +38,14 @@
     self.searchTableView.estimatedRowHeight = 44.0;
     self.searchTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
-
+//    [self.navigationController setNavigationBarHidden:YES];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +103,11 @@
 
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 
 #pragma mark - table delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -134,11 +145,6 @@
     return 0.0;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    _selectedDoc = [self.documents objectAtIndex:indexPath.row];
-//
-//}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -151,14 +157,14 @@
     }
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - scroll view
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_searchBar resignFirstResponder];
 }
-*/
+
+
 
 @end
