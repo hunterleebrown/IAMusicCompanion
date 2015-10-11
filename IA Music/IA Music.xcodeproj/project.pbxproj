@@ -26,6 +26,9 @@
 		5A5321471BC9FDCF003F9299 /* IAMCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5321461BC9FDCF003F9299 /* IAMCSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5A53214C1BCA24B4003F9299 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53214B1BCA24B4003F9299 /* SearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		5A53214F1BCA374E003F9299 /* IAItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53214E1BCA374E003F9299 /* IAItemViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5ABA51031BCAFA070053F28E /* MediaFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABA51021BCAFA070053F28E /* MediaFileCell.m */; settings = {ASSET_TAGS = (); }; };
+		5ABA51061BCAFA8B0053F28E /* MediaFileHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABA51051BCAFA8B0053F28E /* MediaFileHeaderCell.m */; settings = {ASSET_TAGS = (); }; };
+		5ABA51081BCB00340053F28E /* Iconochive-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5ABA51071BCAFB530053F28E /* Iconochive-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,11 @@
 		5A53214B1BCA24B4003F9299 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		5A53214D1BCA374E003F9299 /* IAItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAItemViewController.h; sourceTree = "<group>"; };
 		5A53214E1BCA374E003F9299 /* IAItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAItemViewController.m; sourceTree = "<group>"; };
+		5ABA51011BCAFA070053F28E /* MediaFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFileCell.h; sourceTree = "<group>"; };
+		5ABA51021BCAFA070053F28E /* MediaFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaFileCell.m; sourceTree = "<group>"; };
+		5ABA51041BCAFA8B0053F28E /* MediaFileHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaFileHeaderCell.h; sourceTree = "<group>"; };
+		5ABA51051BCAFA8B0053F28E /* MediaFileHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaFileHeaderCell.m; sourceTree = "<group>"; };
+		5ABA51071BCAFB530053F28E /* Iconochive-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Iconochive-Regular.ttf"; sourceTree = "<group>"; };
 		8C6DDE00E153581533607FF7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E1C7697A3AA2B6BF1BCA2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C46EF1933658A6A4343B616A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +147,7 @@
 		5A5320F41BC9EF23003F9299 /* IA Music */ = {
 			isa = PBXGroup;
 			children = (
+				5ABA51071BCAFB530053F28E /* Iconochive-Regular.ttf */,
 				5A5321441BC9FD9E003F9299 /* ViewControllers */,
 				5A5321381BC9F500003F9299 /* Utils */,
 				5A53212A1BC9F45C003F9299 /* Data */,
@@ -239,6 +248,10 @@
 		5A5321481BCA248C003F9299 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5ABA51011BCAFA070053F28E /* MediaFileCell.h */,
+				5ABA51021BCAFA070053F28E /* MediaFileCell.m */,
+				5ABA51041BCAFA8B0053F28E /* MediaFileHeaderCell.h */,
+				5ABA51051BCAFA8B0053F28E /* MediaFileHeaderCell.m */,
 				5A5321491BCA2494003F9299 /* Search */,
 			);
 			name = Views;
@@ -376,6 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ABA51081BCB00340053F28E /* Iconochive-Regular.ttf in Resources */,
 				5A5321051BC9EF23003F9299 /* LaunchScreen.storyboard in Resources */,
 				5A5321021BC9EF23003F9299 /* Assets.xcassets in Resources */,
 				5A5321291BC9F0A3003F9299 /* Podfile in Resources */,
@@ -460,8 +474,10 @@
 				5A53214C1BCA24B4003F9299 /* SearchTableViewCell.m in Sources */,
 				5A5321361BC9F4C1003F9299 /* ArchiveSearchDoc.m in Sources */,
 				5A5320FA1BC9EF23003F9299 /* AppDelegate.m in Sources */,
+				5ABA51031BCAFA070053F28E /* MediaFileCell.m in Sources */,
 				5A53213F1BC9F53B003F9299 /* MediaUtils.m in Sources */,
 				5A53214F1BCA374E003F9299 /* IAItemViewController.m in Sources */,
+				5ABA51061BCAFA8B0053F28E /* MediaFileHeaderCell.m in Sources */,
 				5A5321471BC9FDCF003F9299 /* IAMCSearchViewController.m in Sources */,
 				5A5320F71BC9EF23003F9299 /* main.m in Sources */,
 			);

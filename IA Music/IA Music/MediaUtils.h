@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Hunter Lee Brown. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "FontMapping.h"
+#import <UIKit/UIKit.h>
 #import "ArchiveFile.h"
 #import "ArchiveSearchDoc.h"
 
@@ -18,8 +17,8 @@
 + (NSString *)iconStringFromMediaType:(MediaType)type;
 + (NSString *)iconStringFromFormat:(FileFormat)format;
 + (FileFormat)formatFromString:(NSString *)name;
-//+ (UIColor *)colorForFileFormat:(FileFormat)format;
-//+ (UIColor *)colorFromMediaType:(MediaType)type;
++ (UIColor *)colorForFileFormat:(FileFormat)format;
++ (UIColor *)colorFromMediaType:(MediaType)type;
 + (MediaType)mediaTypeFromFileFormat:(FileFormat)format;
 + (MediaType)mediaTypeFromString:(NSString*)string;
 + (NSString *)stringFromMediaType:(MediaType)type;

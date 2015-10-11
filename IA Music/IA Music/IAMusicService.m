@@ -64,7 +64,7 @@
             break;
     }
     
-    _parameters = [@{ @"q" : [NSString stringWithFormat:@"%@ AND NOT collection:web AND NOT collection:webwidecrawl AND mediatype:audio", queryString],
+    _parameters = [@{ @"q" : [NSString stringWithFormat:@"%@ AND NOT collection:web AND NOT collection:webwidecrawl AND mediatype:audio AND format:\"VBR MP3\"", queryString],
                      @"output" : @"json",
                      @"rows" : @"50"
                      } mutableCopy];

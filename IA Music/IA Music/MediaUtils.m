@@ -7,6 +7,7 @@
 //
 
 #import "MediaUtils.h"
+#import "FontMapping.h"
 
 
 @implementation MediaUtils
@@ -107,47 +108,48 @@
 }
 
 
-//+ (UIColor *)colorFromMediaType:(MediaType)type
-//{
-//    switch (type) {
-//        case MediaTypeAudio:
-//            return AUDIO_COLOR;
-//            break;
-//
-//        case MediaTypeCollection:
-//            return COLLECTION_COLOR;
-//            break;
-//
-//        case MediaTypeImage:
-//            return IMAGE_COLOR;
-//            break;
-//
-//        case MediaTypeTexts:
-//            return BOOK_COLOR;
-//            break;
-//
-//        case MediaTypeVideo:
-//            return VIDEO_COLOR;
-//            break;
-//
-//        case MediaTypeSoftware:
-//            return SOFTWARE_COLOR;
-//            break;
-//
-//        case MediaTypeEtree:
-//            return ETREE_COLOR;
-//            break;
-//
-//        case MediaTypeAny:
-//            return [UIColor whiteColor];
-//            break;
-//
-//        default:
-//            return [UIColor whiteColor];
-//            break;
-//    }
-//    
-//}
++ (UIColor *)colorFromMediaType:(MediaType)type
+{
+    
+    switch (type) {
+        case MediaTypeAudio:
+            return AUDIO_COLOR;
+            break;
+
+        case MediaTypeCollection:
+            return COLLECTION_COLOR;
+            break;
+
+        case MediaTypeImage:
+            return IMAGE_COLOR;
+            break;
+
+        case MediaTypeTexts:
+            return BOOK_COLOR;
+            break;
+
+        case MediaTypeVideo:
+            return VIDEO_COLOR;
+            break;
+
+        case MediaTypeSoftware:
+            return SOFTWARE_COLOR;
+            break;
+
+        case MediaTypeEtree:
+            return ETREE_COLOR;
+            break;
+
+        case MediaTypeAny:
+            return [UIColor whiteColor];
+            break;
+
+        default:
+            return [UIColor whiteColor];
+            break;
+    }
+    
+}
 
 + (NSString *)iconStringFromFormat:(FileFormat)format
 {
@@ -199,83 +201,83 @@
     }
 }
 
-//+ (UIColor *)colorForFileFormat:(FileFormat)format
-//{
-//    switch (format) {
-//        case FileFormatH264:
-//            return VIDEO_COLOR;
-//            break;
-//        case FileFormatMPEG4:
-//            return VIDEO_COLOR;
-//            break;
-//        case FileFormat512kbMPEG4:
-//            return VIDEO_COLOR;
-//            break;
-//
-//        case FileFormatImage:
-//            return IMAGE_COLOR;
-//            break;
-//            
-//        case FileFormatJPEG:
-//            return IMAGE_COLOR;
-//            break;
-//
-//        case FileFormatPNG:
-//            return IMAGE_COLOR;
-//            break;
-//
-//        case FileFormatGIF:
-//            return IMAGE_COLOR;
-//            break;
-//
-//        case FileFormatProcessedJP2ZIP:
-//            return BOOK_COLOR;
-//            break;
-//
-//        case FileFormatH264HD:
-//            return VIDEO_COLOR;
-//            break;
-//
-//
-//        case FileFormatDjVuTXT:
-//            return BOOK_COLOR;
-//            break;
-//
-//        case FileFormatTxt:
-//            return BOOK_COLOR;
-//            break;
-//
-//
-//        case FileFormatVBRMP3:
-//            return AUDIO_COLOR;
-//            break;
-//
-//
-//        case FileFormat128KbpsMP3:
-//            return AUDIO_COLOR;
-//            break;
-//
-//        case FileFormatMP3:
-//            return AUDIO_COLOR;
-//            break;
-//
-//        case FileFormat96KbpsMP3:
-//            return AUDIO_COLOR;
-//            break;
-//
-//        case FileFormat64KbpsMP3:
-//            return AUDIO_COLOR;
-//            break;
-//
-//        case FileFormatEPUB:
-//            return BOOK_COLOR;
-//            break;
-//
-//        default:
-//            return [UIColor blackColor];
-//            break;
-//    }
-//}
++ (UIColor *)colorForFileFormat:(FileFormat)format
+{
+    switch (format) {
+        case FileFormatH264:
+            return VIDEO_COLOR;
+            break;
+        case FileFormatMPEG4:
+            return VIDEO_COLOR;
+            break;
+        case FileFormat512kbMPEG4:
+            return VIDEO_COLOR;
+            break;
+
+        case FileFormatImage:
+            return IMAGE_COLOR;
+            break;
+            
+        case FileFormatJPEG:
+            return IMAGE_COLOR;
+            break;
+
+        case FileFormatPNG:
+            return IMAGE_COLOR;
+            break;
+
+        case FileFormatGIF:
+            return IMAGE_COLOR;
+            break;
+
+        case FileFormatProcessedJP2ZIP:
+            return BOOK_COLOR;
+            break;
+
+        case FileFormatH264HD:
+            return VIDEO_COLOR;
+            break;
+
+
+        case FileFormatDjVuTXT:
+            return BOOK_COLOR;
+            break;
+
+        case FileFormatTxt:
+            return BOOK_COLOR;
+            break;
+
+
+        case FileFormatVBRMP3:
+            return AUDIO_COLOR;
+            break;
+
+
+        case FileFormat128KbpsMP3:
+            return AUDIO_COLOR;
+            break;
+
+        case FileFormatMP3:
+            return AUDIO_COLOR;
+            break;
+
+        case FileFormat96KbpsMP3:
+            return AUDIO_COLOR;
+            break;
+
+        case FileFormat64KbpsMP3:
+            return AUDIO_COLOR;
+            break;
+
+        case FileFormatEPUB:
+            return BOOK_COLOR;
+            break;
+
+        default:
+            return [UIColor blackColor];
+            break;
+    }
+}
 
 + (MediaType)mediaTypeFromString:(NSString *)string
 {

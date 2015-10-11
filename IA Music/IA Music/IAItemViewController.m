@@ -10,14 +10,19 @@
 #import "IAMusicService.h"
 #import "UIImageView+AFNetworking.h"
 #import "ArchiveFile.h"
+#import "MediaFileCell.h"
+#import "MediaFileHeaderCell.h"
+#import "MediaUtils.h"
 
-@interface IAItemViewController ()
+@interface IAItemViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IAMusicService *service;
 @property (nonatomic, strong) ArchiveDetailDoc *doc;
 
 @property (nonatomic, weak) IBOutlet UIImageView *itemImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UITableView *mediaTable;
+
 
 @property (nonatomic, strong) NSMutableDictionary *organizedMediaFiles;
 
@@ -33,6 +38,12 @@
     
     _organizedMediaFiles = [NSMutableDictionary new];
 
+    _mediaTable.rowHeight = UITableViewAutomaticDimension;
+    _mediaTable.estimatedRowHeight = 44;
+    _mediaTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+    
+
     
     _titleLabel.text = self.searchDoc.title;
     [_itemImageView setImageWithURL:[NSURL URLWithString:self.searchDoc.itemImageUrl]];
@@ -47,13 +58,43 @@
         {
             weakSelf.doc = (ArchiveDetailDoc *)((NSMutableArray *)response[@"documents"])[0];
             [weakSelf orgainizeMediaFiles];
-            
+            [_mediaTable reloadData];
         }
         
         
     }];
     
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self makeTranslToolbar:self.navigationController.navigationBar];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self setNeedsStatusBarAppearanceUpdate];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.itemImageView setImage:nil];
+}
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+
+- (void)makeTranslToolbar:(UINavigationBar *)toolbar
+{
+    [toolbar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    toolbar.backgroundColor = [UIColor clearColor];
+    [toolbar setTintColor:[UIColor lightGrayColor]];
     
+    toolbar.shadowImage = [UIImage new];
+    toolbar.translucent = YES;
 }
 
 
@@ -141,6 +182,16 @@
         }
     }
     
+    // Removing Images
+    for(NSNumber *num in @[[NSNumber numberWithInt:FileFormatPNG], [NSNumber numberWithInt:FileFormatJPEG], [NSNumber numberWithInt:FileFormatPNG15], [NSNumber numberWithInt:FileFormatGIF], [NSNumber numberWithInt:FileFormatImage]])
+    {
+        if([_organizedMediaFiles objectForKey:num] != nil){
+            [_organizedMediaFiles removeObjectForKey:num];
+        }
+        
+    }
+
+    
     
     if([_organizedMediaFiles objectForKey:[NSNumber numberWithInt:FileFormatVBRMP3]] != nil)
     {
@@ -160,6 +211,101 @@
 //    [mediaTable reloadData];
     
 }
+
+#pragma mark - Table Stuff
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if(_organizedMediaFiles.count == 0){
+        return @"";
+    }
+    
+    ArchiveFile *firstFile;
+    firstFile = [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:section]] objectAtIndex:0];
+    return [firstFile.file objectForKey:@"format"];
+    
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MediaFileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell"];
+    
+    if(_organizedMediaFiles.count > 0){
+        ArchiveFile *aFile = [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        
+        //        cell.fileTitle.text = aFile.title;
+        cell.fileTitle.text = [NSString stringWithFormat:@"%@%@",aFile.track ? [NSString stringWithFormat:@"%ld ",(long)aFile.track] : @"",aFile.title];
+        cell.fileFormat.text = [aFile.file objectForKey:@"format"];
+        cell.durationLabel.text = [aFile.file objectForKey:@"duration"];
+        cell.fileName.text = aFile.name;
+        
+    }
+    
+    
+    return cell;
+    
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(_organizedMediaFiles.count > 0){
+        ArchiveFile *aFile = [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        if(aFile.format == FileFormatJPEG || aFile.format == FileFormatGIF || aFile.format == FileFormatPNG || aFile.format == FileFormatImage) {
+//            MediaImageViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"mediaImageViewController"];
+//            [vc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//            ArchiveImage *image = [[ArchiveImage alloc] initWithUrlPath:aFile.url];
+//            [vc setImage:image];
+//            [self presentViewController:vc animated:YES completion:nil];
+        } else if (aFile.format == FileFormatDjVuTXT || aFile.format == FileFormatProcessedJP2ZIP || aFile.format == FileFormatTxt) {
+//            ArchivePageViewController *pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"archivePageViewController"];
+//            [pageViewController setIdentifier:self.searchDoc.identifier];
+//            [pageViewController setBookFile:aFile];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenBookViewer" object:pageViewController];
+        } else if (aFile.format == FileFormatEPUB) {
+//            self.externalUrl = [NSURL URLWithString:aFile.url];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Open Web Page To Save EPUB Book" message:@"Do you want to open Safari?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+//            [alert show];
+            
+        } else {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"AddToPlayerListFileAndPlayNotification" object:aFile];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenMediaPlayer" object:nil];
+            
+            
+        }
+    }
+}
+
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    MediaFileHeaderCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"mediaHeaderCell"];
+    
+    if(_organizedMediaFiles.count > 0){
+        ArchiveFile *firstFile;
+        firstFile = [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:section]] objectAtIndex:0];
+        NSString *format = [firstFile.file objectForKey:@"format"];
+        
+        headerCell.sectionHeaderLabel.text = format;
+        [headerCell setTypeLabelIconFromFileTypeString:format];
+        
+        MediaType type = [MediaUtils mediaTypeFromFileFormat:[MediaUtils formatFromString:format]];
+        headerCell.sectionPlayAllButton.hidden = type == MediaTypeNone || type == MediaTypeTexts;
+        [headerCell.sectionPlayAllButton setTag:section];
+        
+//        [headerCell.sectionPlayAllButton addTarget:self action:@selector(playAll:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return headerCell;
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return _organizedMediaFiles.count;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(_organizedMediaFiles.count == 0){
+        return 0;
+    }
+    
+    return [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:section]] count];
+}
+
+
+
 
 
 @end
