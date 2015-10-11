@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SearchTableViewCell.h
 //  IA Music
 //
 //  Created by Hunter on 10/10/15.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface SearchTableViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel *searchTitle;
 
 @end
-

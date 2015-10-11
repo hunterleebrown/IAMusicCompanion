@@ -10,13 +10,21 @@
 		03142ACB19F37878E461FB7B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6DDE00E153581533607FF7 /* libPods.a */; };
 		5A5320F71BC9EF23003F9299 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5320F61BC9EF23003F9299 /* main.m */; };
 		5A5320FA1BC9EF23003F9299 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5320F91BC9EF23003F9299 /* AppDelegate.m */; };
-		5A5320FD1BC9EF23003F9299 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5320FC1BC9EF23003F9299 /* ViewController.m */; };
 		5A5321001BC9EF23003F9299 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5320FE1BC9EF23003F9299 /* Main.storyboard */; };
 		5A5321021BC9EF23003F9299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A5321011BC9EF23003F9299 /* Assets.xcassets */; };
 		5A5321051BC9EF23003F9299 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5321031BC9EF23003F9299 /* LaunchScreen.storyboard */; };
 		5A5321101BC9EF23003F9299 /* IA_MusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53210F1BC9EF23003F9299 /* IA_MusicTests.m */; };
 		5A53211B1BC9EF23003F9299 /* IA_MusicUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53211A1BC9EF23003F9299 /* IA_MusicUITests.m */; };
 		5A5321291BC9F0A3003F9299 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5A5321281BC9F0A3003F9299 /* Podfile */; settings = {ASSET_TAGS = (); }; };
+		5A5321341BC9F4C1003F9299 /* PlayerFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53212D1BC9F4C1003F9299 /* PlayerFile.m */; settings = {ASSET_TAGS = (); }; };
+		5A5321351BC9F4C1003F9299 /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53212F1BC9F4C1003F9299 /* Favorite.m */; settings = {ASSET_TAGS = (); }; };
+		5A5321361BC9F4C1003F9299 /* ArchiveSearchDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5321311BC9F4C1003F9299 /* ArchiveSearchDoc.m */; settings = {ASSET_TAGS = (); }; };
+		5A5321371BC9F4C1003F9299 /* ArchiveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5321331BC9F4C1003F9299 /* ArchiveFile.m */; settings = {ASSET_TAGS = (); }; };
+		5A53213B1BC9F515003F9299 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53213A1BC9F515003F9299 /* StringUtils.m */; settings = {ASSET_TAGS = (); }; };
+		5A53213F1BC9F53B003F9299 /* MediaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53213E1BC9F53B003F9299 /* MediaUtils.m */; settings = {ASSET_TAGS = (); }; };
+		5A5321431BC9F625003F9299 /* IAMusicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5321421BC9F625003F9299 /* IAMusicService.m */; settings = {ASSET_TAGS = (); }; };
+		5A5321471BC9FDCF003F9299 /* IAMCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5321461BC9FDCF003F9299 /* IAMCSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5A53214C1BCA24B4003F9299 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A53214B1BCA24B4003F9299 /* SearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +49,6 @@
 		5A5320F61BC9EF23003F9299 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A5320F81BC9EF23003F9299 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A5320F91BC9EF23003F9299 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5A5320FB1BC9EF23003F9299 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5A5320FC1BC9EF23003F9299 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5A5320FF1BC9EF23003F9299 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A5321011BC9EF23003F9299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A5321041BC9EF23003F9299 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +60,25 @@
 		5A53211A1BC9EF23003F9299 /* IA_MusicUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IA_MusicUITests.m; sourceTree = "<group>"; };
 		5A53211C1BC9EF23003F9299 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A5321281BC9F0A3003F9299 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = "IA Music/Podfile"; sourceTree = "<group>"; };
+		5A53212C1BC9F4C1003F9299 /* PlayerFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerFile.h; sourceTree = "<group>"; };
+		5A53212D1BC9F4C1003F9299 /* PlayerFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerFile.m; sourceTree = "<group>"; };
+		5A53212E1BC9F4C1003F9299 /* Favorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
+		5A53212F1BC9F4C1003F9299 /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
+		5A5321301BC9F4C1003F9299 /* ArchiveSearchDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveSearchDoc.h; sourceTree = "<group>"; };
+		5A5321311BC9F4C1003F9299 /* ArchiveSearchDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveSearchDoc.m; sourceTree = "<group>"; };
+		5A5321321BC9F4C1003F9299 /* ArchiveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveFile.h; sourceTree = "<group>"; };
+		5A5321331BC9F4C1003F9299 /* ArchiveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveFile.m; sourceTree = "<group>"; };
+		5A5321391BC9F515003F9299 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		5A53213A1BC9F515003F9299 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
+		5A53213C1BC9F533003F9299 /* FontMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FontMapping.h; sourceTree = "<group>"; };
+		5A53213D1BC9F53B003F9299 /* MediaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaUtils.h; sourceTree = "<group>"; };
+		5A53213E1BC9F53B003F9299 /* MediaUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaUtils.m; sourceTree = "<group>"; };
+		5A5321411BC9F625003F9299 /* IAMusicService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAMusicService.h; sourceTree = "<group>"; };
+		5A5321421BC9F625003F9299 /* IAMusicService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAMusicService.m; sourceTree = "<group>"; };
+		5A5321451BC9FDCF003F9299 /* IAMCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAMCSearchViewController.h; sourceTree = "<group>"; };
+		5A5321461BC9FDCF003F9299 /* IAMCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAMCSearchViewController.m; sourceTree = "<group>"; };
+		5A53214A1BCA24B4003F9299 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
+		5A53214B1BCA24B4003F9299 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		8C6DDE00E153581533607FF7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E1C7697A3AA2B6BF1BCA2D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C46EF1933658A6A4343B616A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,10 +136,11 @@
 		5A5320F41BC9EF23003F9299 /* IA Music */ = {
 			isa = PBXGroup;
 			children = (
+				5A5321441BC9FD9E003F9299 /* ViewControllers */,
+				5A5321381BC9F500003F9299 /* Utils */,
+				5A53212A1BC9F45C003F9299 /* Data */,
 				5A5320F81BC9EF23003F9299 /* AppDelegate.h */,
 				5A5320F91BC9EF23003F9299 /* AppDelegate.m */,
-				5A5320FB1BC9EF23003F9299 /* ViewController.h */,
-				5A5320FC1BC9EF23003F9299 /* ViewController.m */,
 				5A5320FE1BC9EF23003F9299 /* Main.storyboard */,
 				5A5321011BC9EF23003F9299 /* Assets.xcassets */,
 				5A5321031BC9EF23003F9299 /* LaunchScreen.storyboard */,
@@ -148,6 +174,78 @@
 				5A53211C1BC9EF23003F9299 /* Info.plist */,
 			);
 			path = "IA MusicUITests";
+			sourceTree = "<group>";
+		};
+		5A53212A1BC9F45C003F9299 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5A5321401BC9F5A1003F9299 /* Service */,
+				5A53212B1BC9F4A8003F9299 /* Model */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		5A53212B1BC9F4A8003F9299 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A53212C1BC9F4C1003F9299 /* PlayerFile.h */,
+				5A53212D1BC9F4C1003F9299 /* PlayerFile.m */,
+				5A53212E1BC9F4C1003F9299 /* Favorite.h */,
+				5A53212F1BC9F4C1003F9299 /* Favorite.m */,
+				5A5321301BC9F4C1003F9299 /* ArchiveSearchDoc.h */,
+				5A5321311BC9F4C1003F9299 /* ArchiveSearchDoc.m */,
+				5A5321321BC9F4C1003F9299 /* ArchiveFile.h */,
+				5A5321331BC9F4C1003F9299 /* ArchiveFile.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5A5321381BC9F500003F9299 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5A53213D1BC9F53B003F9299 /* MediaUtils.h */,
+				5A53213E1BC9F53B003F9299 /* MediaUtils.m */,
+				5A53213C1BC9F533003F9299 /* FontMapping.h */,
+				5A5321391BC9F515003F9299 /* StringUtils.h */,
+				5A53213A1BC9F515003F9299 /* StringUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		5A5321401BC9F5A1003F9299 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5A5321411BC9F625003F9299 /* IAMusicService.h */,
+				5A5321421BC9F625003F9299 /* IAMusicService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		5A5321441BC9FD9E003F9299 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A5321481BCA248C003F9299 /* Views */,
+				5A5321451BC9FDCF003F9299 /* IAMCSearchViewController.h */,
+				5A5321461BC9FDCF003F9299 /* IAMCSearchViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5A5321481BCA248C003F9299 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A5321491BCA2494003F9299 /* Search */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5A5321491BCA2494003F9299 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5A53214A1BCA24B4003F9299 /* SearchTableViewCell.h */,
+				5A53214B1BCA24B4003F9299 /* SearchTableViewCell.m */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		C46F0FBFFA3588E3FD71CE78 /* Pods */ = {
@@ -349,8 +447,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A5320FD1BC9EF23003F9299 /* ViewController.m in Sources */,
+				5A53213B1BC9F515003F9299 /* StringUtils.m in Sources */,
+				5A5321431BC9F625003F9299 /* IAMusicService.m in Sources */,
+				5A5321341BC9F4C1003F9299 /* PlayerFile.m in Sources */,
+				5A5321351BC9F4C1003F9299 /* Favorite.m in Sources */,
+				5A5321371BC9F4C1003F9299 /* ArchiveFile.m in Sources */,
+				5A53214C1BCA24B4003F9299 /* SearchTableViewCell.m in Sources */,
+				5A5321361BC9F4C1003F9299 /* ArchiveSearchDoc.m in Sources */,
 				5A5320FA1BC9EF23003F9299 /* AppDelegate.m in Sources */,
+				5A53213F1BC9F53B003F9299 /* MediaUtils.m in Sources */,
+				5A5321471BC9FDCF003F9299 /* IAMCSearchViewController.m in Sources */,
 				5A5320F71BC9EF23003F9299 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
