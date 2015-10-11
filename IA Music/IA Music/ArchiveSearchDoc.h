@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, MediaType) {
 @interface ArchiveSearchDoc : NSObject
 
 @property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *headerImageUrl;
+@property (strong, nonatomic) NSString *itemImageUrl;
 @property (strong, nonatomic) NSString *details;
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *publicDate;
@@ -33,7 +33,6 @@ typedef NS_ENUM(NSUInteger, MediaType) {
 @property (strong, nonatomic) NSString *creator;
 
 @property (strong, nonatomic) NSDictionary *rawDoc;
-//@property (strong, nonatomic) ArchiveImage *archiveImage;
 @property (nonatomic) MediaType type;
 
 

@@ -15,7 +15,6 @@
 @property (nonatomic, strong) NSString *testUrl;
 @property (nonatomic, strong) NSString *loadMoreStart;
 @property (nonatomic, strong) NSString *fileNameIn;
-@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSString *urlStr;
 
 @property (nonatomic, strong) NSDictionary *parameters;
@@ -25,23 +24,32 @@
 
 @implementation IAMusicService
 
-- (id) initWithQueryString:(NSString *)query {
+
+- (id)init
+{
     self = [super init];
-    if(self){
-        [self setQueryString:query];
-        _searchField = SearchFieldsAll;
+    if(self)
+    {
+        self.searchField = SearchFieldsAll;
     }
-    
     return self;
 }
+
+
+- (void)setIdentifier:(NSString *)identifier
+{
+    _testUrl = @"http://archive.org/metadata/%@";
+    _identifier = identifier;
+    _urlStr = [NSString stringWithFormat:_testUrl, identifier];
+    _parameters = nil;
+}
+
 
 - (void)setQueryString:(NSString *)queryString
 {
     _queryString = queryString;
     _urlStr = @"https://archive.org/advancedsearch.php";
-     
-
-    NSString *searchFieldString;
+    
     switch (self.searchField) {
         case SearchFieldsAll:
             queryString = queryString;
@@ -71,8 +79,9 @@
 - (void)fetchIASearcDocsWithCompletionHandler:(IAFetchCompletionHandler)completion
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     [manager GET:_urlStr parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
         NSLog(@"%@ %@", _urlStr, _parameters);
         completion([self packageJsonResponeDictionary:responseObject]);
         
@@ -81,6 +90,7 @@
         NSLog(@"Error: %@", error);
         
     }];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
 }
 
@@ -108,14 +118,10 @@
                     [aDoc setTitle:[doc objectForKey:@"title"]];
                     
                     if(![doc objectForKey:@"headerImage"]){
-                        [aDoc setHeaderImageUrl:[NSString stringWithFormat:@"http://archive.org/services/img/%@", aDoc.identifier]];
-//                        ArchiveImage *anImage = [[ArchiveImage alloc] initWithUrlPath:aDoc.headerImageUrl];
-//                        [aDoc setArchiveImage:anImage];
+                        [aDoc setItemImageUrl:[NSString stringWithFormat:@"http://archive.org/services/img/%@", aDoc.identifier]];
                         
                     } else {
-                        [aDoc setHeaderImageUrl:[doc objectForKey:@"headerImage"]];
-//                        ArchiveImage *anImage = [[ArchiveImage alloc] initWithUrlPath:aDoc.headerImageUrl];
-//                        [aDoc setArchiveImage:anImage];
+                        [aDoc setItemImageUrl:[doc objectForKey:@"headerImage"]];
                     }
                     [aDoc setDetails:[doc objectForKey:@"description"]];
                     [aDoc setPublicDate:[doc objectForKey:@"publicdate"]];
@@ -148,13 +154,9 @@
         }
         
         if(![metadata objectForKey:@"headerImage"]){
-            [dDoc setHeaderImageUrl:[NSString stringWithFormat:@"http://archive.org/services/img/%@", dDoc.identifier]];
-//            ArchiveImage *anImage = [[ArchiveImage alloc] initWithUrlPath:dDoc.headerImageUrl];
-//            [dDoc setArchiveImage:anImage];
+            [dDoc setItemImageUrl:[NSString stringWithFormat:@"http://archive.org/services/img/%@", dDoc.identifier]];
         } else {
-            [dDoc setHeaderImageUrl:[metadata objectForKey:@"headerImage"]];
-//            ArchiveImage *anImage = [[ArchiveImage alloc] initWithUrlPath:dDoc.headerImageUrl];
-//            [dDoc setArchiveImage:anImage];
+            [dDoc setItemImageUrl:[metadata objectForKey:@"headerImage"]];
         }
         
         // Descriptions can now be arrays... yay
@@ -229,10 +231,10 @@
 //            [self.delegate dataDidBecomeAvailableForService:self];
 //        }
 //    }
+
     
     return responseDocs;
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     
     

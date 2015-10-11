@@ -33,8 +33,13 @@ typedef void (^IAFetchCompletionHandler)(NSArray<ArchiveSearchDoc *> *docs);
 
 @property (nonatomic, strong) NSString *queryString;
 @property (nonatomic) SearchFields searchField;
+@property (nonatomic, strong) NSString *identifier;
 
-- (id) initWithQueryString:(NSString *)query;
+
+
+//- (id) initWithQueryString:(NSString *)query;
+//- (id) initWithIAIdentifier:(NSString *)identifier;
+
 - (void)fetchIASearcDocsWithCompletionHandler:(IAFetchCompletionHandler)completion;
 
 @end

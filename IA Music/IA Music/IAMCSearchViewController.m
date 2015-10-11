@@ -9,6 +9,9 @@
 #import "IAMCSearchViewController.h"
 #import "IAMusicService.h"
 #import "SearchTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "IAItemViewController.h"
+
 
 @interface IAMCSearchViewController ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +22,7 @@
 
 @property (nonatomic, strong) NSMutableArray *documents;
 
+@property (nonatomic, strong) ArchiveSearchDoc *selectedDoc;
 
 @end
 
@@ -28,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.service = [[IAMusicService alloc] initWithQueryString:@""];
+    self.service = [IAMusicService new];
     self.documents = [NSMutableArray new];
     
     self.searchTableView.estimatedRowHeight = 44.0;
@@ -111,6 +115,7 @@
     ArchiveSearchDoc *doc = [self.documents objectAtIndex:indexPath.row];
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
     cell.searchTitle.text = doc.title;
+    [cell.searchImageView setImageWithURL:[NSURL URLWithString:doc.itemImageUrl] placeholderImage:nil];
     
     return cell;
 }
@@ -129,6 +134,22 @@
     return 0.0;
 }
 
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    _selectedDoc = [self.documents objectAtIndex:indexPath.row];
+//
+//}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"cellPush"])
+    {
+        IAItemViewController *itemVC = [segue destinationViewController];
+        ArchiveSearchDoc *doc = [self.documents objectAtIndex:[self.searchTableView indexPathForSelectedRow].row];
+        [itemVC setSearchDoc:doc];
+    }
+}
 
 /*
 #pragma mark - Navigation

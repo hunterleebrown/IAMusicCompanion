@@ -11,5 +11,6 @@
 @interface SearchTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *searchTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *searchImageView;
 
 @end
