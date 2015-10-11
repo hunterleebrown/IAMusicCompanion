@@ -24,6 +24,11 @@
 
 @property (nonatomic, strong) ArchiveSearchDoc *selectedDoc;
 
+@property (nonatomic) int numFound;
+@property (nonatomic) int start;
+@property (assign) BOOL didTriggerLoadMore;
+
+
 @end
 
 @implementation IAMCSearchViewController
@@ -59,11 +64,13 @@
 #pragma mark - search bar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    self.start = 0;
     [self doSearch:searchBar];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    self.start = 0;
     [self doSearch:searchBar];
 }
 
@@ -75,16 +82,33 @@
         [self.searchTableView reloadData];
         return;
     }
-    
     self.service.queryString = searchBar.text;
-    [self.service fetchIASearcDocsWithCompletionHandler:^(NSArray<ArchiveSearchDoc *> *docs) {
-        [self.documents removeAllObjects];
-        [self.documents addObjectsFromArray:docs];
-        [self.searchTableView reloadData];
+    self.service.start = self.start;
+    [self.service fetchIASearcDocsWithCompletionHandler:^(NSMutableDictionary *response) {
         
+        if(!self.didTriggerLoadMore) {
+            [self.documents removeAllObjects];
+        }
+        
+        [self.documents addObjectsFromArray:response[@"documents"]];
+        self.numFound = [response[@"numFound"] intValue];
+        [self.searchTableView reloadData];
+        NSLog(@"-------------> numFound:%i", self.numFound);
+        
+        self.didTriggerLoadMore = NO;
+
     }];
 
 }
+
+- (void)loadMoreItems {
+    if(self.numFound > 50) {
+        self.didTriggerLoadMore = YES;
+        self.start = self.start + 50;
+        [self doSearch:self.searchBar];
+    }
+}
+
 
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
@@ -98,7 +122,7 @@
             self.service.searchField = SearchFieldsAll;
             break;
     }
-    
+    self.start = 0;
     [self doSearch:searchBar];
 
 }
@@ -125,6 +149,7 @@
 {
     ArchiveSearchDoc *doc = [self.documents objectAtIndex:indexPath.row];
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
+//    cell.searchTitle.text = [NSString stringWithFormat:@"%li %@", (long)indexPath.row, doc.title];
     cell.searchTitle.text = doc.title;
     [cell.searchImageView setImageWithURL:[NSURL URLWithString:doc.itemImageUrl] placeholderImage:nil];
     
@@ -163,6 +188,15 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_searchBar resignFirstResponder];
+    
+    if(scrollView.contentOffset.y > scrollView.contentSize.height * 0.5)
+    {
+        if(self.documents.count > 0  && self.documents.count < self.numFound  && self.start < self.numFound && !self.didTriggerLoadMore){
+            [self loadMoreItems];
+        }
+    }
+    
+    
 }
 
 

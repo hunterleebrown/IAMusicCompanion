@@ -12,11 +12,11 @@
 
 @interface Favorite : NSManagedObject
 
-@property (nonatomic, retain) NSString * identifierTitle;
-@property (nonatomic, retain) NSString * identifier;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSString * format;
+@property (nonatomic, retain) NSString *identifierTitle;
+@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *format;
 @property (nonatomic, retain) NSNumber *displayOrder;
 
 

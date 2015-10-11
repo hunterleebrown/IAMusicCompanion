@@ -17,7 +17,9 @@
 @property (nonatomic, strong) NSString *fileNameIn;
 @property (nonatomic, strong) NSString *urlStr;
 
-@property (nonatomic, strong) NSDictionary *parameters;
+@property (nonatomic, strong) NSMutableDictionary *parameters;
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end
@@ -31,6 +33,8 @@
     if(self)
     {
         self.searchField = SearchFieldsAll;
+        self.manager = [AFHTTPRequestOperationManager manager];
+
     }
     return self;
 }
@@ -60,13 +64,18 @@
             break;
     }
     
-    _parameters = @{ @"q" : [NSString stringWithFormat:@"%@ AND NOT collection:web AND NOT collection:webwidecrawl AND mediatype:audio", queryString],
+    _parameters = [@{ @"q" : [NSString stringWithFormat:@"%@ AND NOT collection:web AND NOT collection:webwidecrawl AND mediatype:audio", queryString],
                      @"output" : @"json",
                      @"rows" : @"50"
-                     };
+                     } mutableCopy];
 
 }
 
+- (void)setStart:(int)start
+{
+    [_parameters setObject:[NSString stringWithFormat:@"%i",start] forKey:@"start"];
+
+}
 
 - (void)setSearchField:(SearchFields)searchField
 {
@@ -78,10 +87,10 @@
 
 - (void)fetchIASearcDocsWithCompletionHandler:(IAFetchCompletionHandler)completion
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    [manager GET:_urlStr parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager.operationQueue cancelAllOperations];
+    [self.manager GET:_urlStr parameters:_parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@ %@", _urlStr, _parameters);
         completion([self packageJsonResponeDictionary:responseObject]);
         
@@ -96,10 +105,10 @@
 
 
 
-- (NSMutableArray *) packageJsonResponeDictionary:(NSDictionary *)jsonResponse{
+- (NSMutableDictionary *) packageJsonResponeDictionary:(NSDictionary *)jsonResponse{
     
     
-//    rawResults = [NSMutableDictionary new];
+    NSMutableDictionary *rawResults = [NSMutableDictionary new];
 //    [rawResults setObject:jsonResponse forKey:@"original"];
     NSMutableArray *responseDocs = [NSMutableArray new];
     
@@ -133,17 +142,17 @@
                 }
                 
             }
-//            [rawResults setObject:responseDocs forKey:@"documents"];
-//            [rawResults setObject:[response objectForKey:@"numFound"] forKey:@"numFound"];
+            [rawResults setObject:responseDocs forKey:@"documents"];
+            [rawResults setObject:[response objectForKey:@"numFound"] forKey:@"numFound"];
         }
     }
     
     if(metadata){
         ArchiveDetailDoc *dDoc = [ArchiveDetailDoc new];
-        [dDoc setRawDoc:jsonResponse];
         NSDictionary *metadata = [jsonResponse objectForKey:@"metadata"];
+        [dDoc setRawDoc:metadata];
         [dDoc setIdentifier:[metadata objectForKey:@"identifier"]];
-        
+
         if([[metadata objectForKey:@"title"] isKindOfClass:[NSArray class]])
         {
             [dDoc setTitle:[metadata objectForKey:@"title"][0]];
@@ -194,11 +203,9 @@
             }
         }
         [dDoc setFiles:files];
-        
         [dDoc setType:[MediaUtils mediaTypeFromString:[metadata objectForKey:@"mediatype"]]];
-        
         [responseDocs addObject:dDoc];
-//        [rawResults setObject:responseDocs forKey:@"documents"];
+        [rawResults setObject:responseDocs forKey:@"documents"];
         
     }
     
@@ -233,7 +240,7 @@
 //    }
 
     
-    return responseDocs;
+    return rawResults;
     
     
     

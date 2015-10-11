@@ -27,13 +27,14 @@ typedef NS_ENUM(NSUInteger, SearchFields)
 };
 
 
-typedef void (^IAFetchCompletionHandler)(NSArray<ArchiveSearchDoc *> *docs);
+typedef void (^IAFetchCompletionHandler)(NSMutableDictionary *response);
 
 @interface IAMusicService : NSObject
 
 @property (nonatomic, strong) NSString *queryString;
 @property (nonatomic) SearchFields searchField;
 @property (nonatomic, strong) NSString *identifier;
+@property (nonatomic) int start;
 
 
 
