@@ -150,8 +150,10 @@
     ArchiveSearchDoc *doc = [self.documents objectAtIndex:indexPath.row];
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
 //    cell.searchTitle.text = [NSString stringWithFormat:@"%li %@", (long)indexPath.row, doc.title];
-    cell.searchTitle.text = doc.title;
-    [cell.searchImageView setImageWithURL:[NSURL URLWithString:doc.itemImageUrl] placeholderImage:nil];
+//    cell.searchTitle.text = doc.title;
+//    [cell.searchImageView setImageWithURL:[NSURL URLWithString:doc.itemImageUrl] placeholderImage:nil];
+//    
+    [cell setArchiveSearchDoc:doc];
     
     return cell;
 }

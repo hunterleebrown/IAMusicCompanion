@@ -42,7 +42,6 @@
     _mediaTable.estimatedRowHeight = 44;
     _mediaTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
-    
 
     
     _titleLabel.text = self.searchDoc.title;
@@ -66,6 +65,15 @@
     
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     [self makeTranslToolbar:self.navigationController.navigationBar];
+
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    _titleLabel.preferredMaxLayoutWidth = _titleLabel.frame.size.width;
+    [_titleLabel sizeToFit];
+    [self.view layoutIfNeeded];
 
 }
 
@@ -183,7 +191,14 @@
     }
     
     // Removing Images
-    for(NSNumber *num in @[[NSNumber numberWithInt:FileFormatPNG], [NSNumber numberWithInt:FileFormatJPEG], [NSNumber numberWithInt:FileFormatPNG15], [NSNumber numberWithInt:FileFormatGIF], [NSNumber numberWithInt:FileFormatImage]])
+    for(NSNumber *num in @[[NSNumber numberWithInt:FileFormatH264],
+                           [NSNumber numberWithInt:FileFormatH264HD],
+                           [NSNumber numberWithInt:FileFormatMPEG4],
+                           [NSNumber numberWithInt:FileFormatPNG],
+                           [NSNumber numberWithInt:FileFormatJPEG],
+                           [NSNumber numberWithInt:FileFormatPNG15],
+                           [NSNumber numberWithInt:FileFormatGIF],
+                           [NSNumber numberWithInt:FileFormatImage]])
     {
         if([_organizedMediaFiles objectForKey:num] != nil){
             [_organizedMediaFiles removeObjectForKey:num];
