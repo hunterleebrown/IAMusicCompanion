@@ -28,6 +28,12 @@
 @property (nonatomic, strong) UIColor *avgColor;
 @property (nonatomic, strong) UIColor *adjColor;
 
+@property (nonatomic, strong) CAGradientLayer *gradientOverlay;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *imageTopConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topOfMediaTableConstraint;
+@property (nonatomic) CGFloat originalTableTopOrigin;
+
 @end
 
 @implementation IAItemViewController
@@ -109,13 +115,12 @@
     }];
     //    }
     
-    CAGradientLayer *overlayGradient = [CAGradientLayer layer];
-    overlayGradient.frame = _itemImageView.bounds;
-    overlayGradient.colors = [NSArray arrayWithObjects: (id)[UIColor clearColor].CGColor, (id)_avgColor.CGColor, nil];
-    [_itemImageView.layer insertSublayer:overlayGradient atIndex:0];
+    _gradientOverlay = [CAGradientLayer layer];
+    _gradientOverlay.colors = [NSArray arrayWithObjects: (id)[UIColor clearColor].CGColor, (id)_avgColor.CGColor, nil];
+    [_itemImageView.layer insertSublayer:_gradientOverlay atIndex:0];
     
  
-
+    _originalTableTopOrigin = self.mediaTable.frame.origin.y;
     
 }
 
@@ -130,6 +135,9 @@
     [super viewDidLayoutSubviews];
     _titleLabel.preferredMaxLayoutWidth = _titleLabel.frame.size.width;
     [_titleLabel sizeToFit];
+    _gradientOverlay.frame = _itemImageView.bounds;
+
+    
     [self.view layoutIfNeeded];
 
 }
@@ -139,9 +147,18 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [UIView animateWithDuration:0.15 animations:^{
+        [self.itemImageView setAlpha:1.0];
+    }];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.itemImageView setImage:nil];
+    [UIView animateWithDuration:0.15 animations:^{
+        [self.itemImageView setAlpha:0];
+    }];
 }
 
 
@@ -373,6 +390,87 @@
     
     return [[_organizedMediaFiles objectForKey:[[_organizedMediaFiles allKeys]  objectAtIndex:section]] count];
 }
+
+#pragma mark - scrollview fun
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    NSLog(@"---------> offset:%f", scrollView.contentOffset.y);
+    NSLog(@"---------> mediaTable top:%f", self.mediaTable.frame.origin.y);
+    
+    CGFloat con = scrollView.contentOffset.y;
+
+    
+    if(con > 0 && self.mediaTable.frame.origin.y > 44)
+    {
+        
+        self.topOfMediaTableConstraint.constant -= con;
+        [self.mediaTable setNeedsUpdateConstraints];
+        [self.mediaTable layoutIfNeeded];
+        
+        self.imageTopConstraint.constant -= con * 0.75;
+        [self.itemImageView setNeedsUpdateConstraints];
+        [self.itemImageView layoutIfNeeded];
+
+    
+        
+        CGFloat a =  (self.mediaTable.frame.origin.y/self.originalTableTopOrigin) - 0.25;
+        _titleLabel.alpha =  a;
+        
+        [self.navigationController.navigationBar setAlpha:a];
+        self.itemImageView.alpha = a;
+    }
+    
+    if (con < 0 && self.mediaTable.frame.origin.y < self.originalTableTopOrigin)
+    {
+        self.topOfMediaTableConstraint.constant -= con;
+        [self.mediaTable setNeedsUpdateConstraints];
+        [self.mediaTable layoutIfNeeded];
+        
+        if(con * 0.75 < 0)
+        {
+            self.imageTopConstraint.constant -= con * 0.75;
+        }
+        else
+        {
+            self.imageTopConstraint.constant = 0;
+        }
+        
+        [self.itemImageView setNeedsUpdateConstraints];
+        [self.itemImageView layoutIfNeeded];
+
+        CGFloat a =  (self.mediaTable.frame.origin.y/self.originalTableTopOrigin) - 0.25;
+        _titleLabel.alpha =  a;
+        
+        [self.navigationController.navigationBar setAlpha:a];
+        self.itemImageView.alpha = a;
+
+
+    }
+
+//    if(con < 0)
+//    {
+//        CGFloat factor = fabs(scrollView.contentOffset.y / scrollView.contentInset.top) - 1.0f;
+//        factor *= 0.3;
+//        
+//        CATransform3D scaleTransform = CATransform3DIdentity;
+//        scaleTransform = CATransform3DScale(scaleTransform, 1.0f + factor, 1.0f + factor, 0);
+//        self.itemImageView.layer.transform = scaleTransform;
+//    }
+    
+    
+}
+//- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if (self.mediaTable.frame.origin.y > 44 && self.mediaTable.frame.origin.y < self.originalTableTopOrigin) {
+//        [UIView animateWithDuration:0.45 animations:^{
+//            self.topOfMediaTableConstraint.constant = self.originalTableTopOrigin;
+//            [self.mediaTable setNeedsUpdateConstraints];
+//            [self.mediaTable layoutIfNeeded];
+//        }];
+//    }
+//}
 
 
 #pragma mark - image and color

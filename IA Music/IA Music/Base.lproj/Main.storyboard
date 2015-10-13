@@ -285,7 +285,7 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yPN-Tk-B7n">
-                                <rect key="frame" x="30" y="164" width="560" height="20"/>
+                                <rect key="frame" x="10" y="164" width="580" height="20"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="Esg-bn-58p"/>
@@ -419,9 +419,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="top" secondItem="kQe-qD-CGK" secondAttribute="top" id="2Zu-1K-tZr"/>
-                            <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leadingMargin" constant="10" id="4Yv-0J-CAZ"/>
+                            <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leadingMargin" constant="5" id="4Yv-0J-CAZ"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="4LB-A1-gEo" secondAttribute="trailing" constant="10" id="4bR-Ms-wjt"/>
                             <constraint firstItem="BBy-dj-KvF" firstAttribute="top" secondItem="sFd-Ch-3e5" secondAttribute="bottom" id="4yB-1U-weA"/>
+                            <constraint firstAttribute="trailing" secondItem="yPN-Tk-B7n" secondAttribute="trailing" constant="10" id="8QS-mA-mEu"/>
+                            <constraint firstItem="sFd-Ch-3e5" firstAttribute="top" secondItem="yPN-Tk-B7n" secondAttribute="bottom" constant="184" id="91H-Bg-2Jr"/>
                             <constraint firstAttribute="trailing" secondItem="4LB-A1-gEo" secondAttribute="trailing" id="D2m-DL-fEp"/>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="top" secondItem="kQe-qD-CGK" secondAttribute="top" id="EJI-gb-zrN"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="4LB-A1-gEo" secondAttribute="trailing" constant="10" id="EqV-74-VeH"/>
@@ -435,12 +437,14 @@
                             <constraint firstItem="sFd-Ch-3e5" firstAttribute="top" secondItem="4LB-A1-gEo" secondAttribute="bottom" constant="10" id="VdQ-vx-Hew"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="4LB-A1-gEo" secondAttribute="trailing" constant="10" id="cmw-T7-AbK"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="top" secondItem="mXc-LJ-bQ0" secondAttribute="bottom" constant="10" id="dId-uD-wa6"/>
-                            <constraint firstAttribute="trailing" secondItem="yPN-Tk-B7n" secondAttribute="trailing" constant="10" id="esY-ZG-YdI"/>
+                            <constraint firstAttribute="trailing" secondItem="yPN-Tk-B7n" secondAttribute="trailing" constant="5" id="esY-ZG-YdI"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="bottom" secondItem="4LB-A1-gEo" secondAttribute="bottom" id="gpn-Eh-v6u"/>
+                            <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leading" constant="10" id="h3v-i5-ZOS"/>
                             <constraint firstItem="yPN-Tk-B7n" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leading" constant="10" id="jmi-cc-vwh"/>
                             <constraint firstItem="sFd-Ch-3e5" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leading" id="lzo-Ge-htl"/>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="top" secondItem="mXc-LJ-bQ0" secondAttribute="bottom" constant="10" id="mGk-gR-wAv"/>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leading" id="mJH-Ju-ZLx"/>
+                            <constraint firstItem="sFd-Ch-3e5" firstAttribute="top" secondItem="kQe-qD-CGK" secondAttribute="top" constant="194" id="nQo-HO-Qcv"/>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="top" secondItem="kQe-qD-CGK" secondAttribute="top" id="nWa-r7-hEb"/>
                             <constraint firstAttribute="trailing" secondItem="sFd-Ch-3e5" secondAttribute="trailing" id="naO-uy-vsh"/>
                             <constraint firstItem="4LB-A1-gEo" firstAttribute="leading" secondItem="kQe-qD-CGK" secondAttribute="leading" constant="10" id="oGX-9D-kfl"/>
@@ -461,23 +465,29 @@
                                 <exclude reference="oGX-9D-kfl"/>
                                 <exclude reference="qiu-00-6QK"/>
                                 <exclude reference="t4O-CR-tae"/>
+                                <exclude reference="4Yv-0J-CAZ"/>
                                 <exclude reference="4bR-Ms-wjt"/>
                                 <exclude reference="EqV-74-VeH"/>
                                 <exclude reference="LLG-lj-Oh8"/>
                                 <exclude reference="M1R-BT-AHj"/>
                                 <exclude reference="cmw-T7-AbK"/>
                                 <exclude reference="dId-uD-wa6"/>
+                                <exclude reference="esY-ZG-YdI"/>
                                 <exclude reference="gpn-Eh-v6u"/>
                                 <exclude reference="jmi-cc-vwh"/>
                                 <exclude reference="xMi-iq-bEf"/>
+                                <exclude reference="91H-Bg-2Jr"/>
                                 <exclude reference="GdL-z4-6UY"/>
+                                <exclude reference="VdQ-vx-Hew"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="imageTopConstraint" destination="EJI-gb-zrN" id="khR-qD-wGR"/>
                         <outlet property="itemImageView" destination="4LB-A1-gEo" id="Xus-M1-Nze"/>
                         <outlet property="mediaTable" destination="sFd-Ch-3e5" id="7ck-JA-4ky"/>
                         <outlet property="titleLabel" destination="yPN-Tk-B7n" id="JcE-yh-gFa"/>
+                        <outlet property="topOfMediaTableConstraint" destination="nQo-HO-Qcv" id="22Q-l3-8PC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iw0-8r-po3" userLabel="First Responder" sceneMemberID="firstResponder"/>
