@@ -77,6 +77,7 @@
             if(brightness > 0.75)
             {
                 _adjColor = [UIColor blackColor];
+                self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
             }
             else
             {
@@ -84,6 +85,7 @@
 //                brightness = MAX(MIN(brightness, 1.0), 0.0);
 //                _adjColor =  [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
                 _adjColor = [UIColor whiteColor];
+                self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 
             }
         }
@@ -112,7 +114,15 @@
     overlayGradient.colors = [NSArray arrayWithObjects: (id)[UIColor clearColor].CGColor, (id)_avgColor.CGColor, nil];
     [_itemImageView.layer insertSublayer:overlayGradient atIndex:0];
     
+ 
+
     
+}
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLayoutSubviews
@@ -126,7 +136,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self setNeedsStatusBarAppearanceUpdate];
 
 }
 
@@ -136,10 +145,7 @@
 }
 
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
+
 
 
 - (void)makeTranslToolbar:(UINavigationBar *)toolbar
