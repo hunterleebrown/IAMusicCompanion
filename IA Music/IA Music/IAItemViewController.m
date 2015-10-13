@@ -25,6 +25,8 @@
 
 
 @property (nonatomic, strong) NSMutableDictionary *organizedMediaFiles;
+@property (nonatomic, strong) UIColor *avgColor;
+@property (nonatomic, strong) UIColor *adjColor;
 
 @end
 
@@ -50,6 +52,47 @@
     _service = [IAMusicService new];
     _service.identifier = _searchDoc.identifier;
     
+
+    
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self makeTranslToolbar:self.navigationController.navigationBar];
+
+    
+    CGFloat hue, saturation, brightness, alpha;
+
+//    
+//    if([self isGrayScaleImage:self.itemImageView.image])
+//    {
+//        _avgColor = [UIColor whiteColor];
+//        _adjColor = [UIColor whiteColor];
+//    }
+//    else
+//    {
+    
+        _avgColor = [self averageColor:self.itemImageView.image];
+        
+        if ([_avgColor getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha]) {
+            
+            NSLog(@"----------> brightness:%f", brightness);
+            if(brightness > 0.75)
+            {
+                _adjColor = [UIColor blackColor];
+            }
+            else
+            {
+//                brightness += (1.5-1.0);
+//                brightness = MAX(MIN(brightness, 1.0), 0.0);
+//                _adjColor =  [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
+                _adjColor = [UIColor whiteColor];
+
+            }
+        }
+    
+    
+    [self.navigationController.navigationBar setTintColor:_adjColor];
+    self.view.backgroundColor = _avgColor;
+    _titleLabel.textColor = _adjColor;
+    
     IAItemViewController __weak *weakSelf = self;
     [_service fetchIASearcDocsWithCompletionHandler:^(NSMutableDictionary *response) {
         
@@ -62,10 +105,14 @@
         
         
     }];
+    //    }
     
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
-    [self makeTranslToolbar:self.navigationController.navigationBar];
-
+    CAGradientLayer *overlayGradient = [CAGradientLayer layer];
+    overlayGradient.frame = _itemImageView.bounds;
+    overlayGradient.colors = [NSArray arrayWithObjects: (id)[UIColor clearColor].CGColor, (id)_avgColor.CGColor, nil];
+    [_itemImageView.layer insertSublayer:overlayGradient atIndex:0];
+    
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -250,6 +297,7 @@
         cell.fileFormat.text = [aFile.file objectForKey:@"format"];
         cell.durationLabel.text = [aFile.file objectForKey:@"duration"];
         cell.fileName.text = aFile.name;
+        cell.fileTitle.textColor = self.adjColor;
         
     }
     
@@ -296,6 +344,7 @@
         NSString *format = [firstFile.file objectForKey:@"format"];
         
         headerCell.sectionHeaderLabel.text = format;
+        headerCell.sectionHeaderLabel.textColor = self.adjColor;
         [headerCell setTypeLabelIconFromFileTypeString:format];
         
         MediaType type = [MediaUtils mediaTypeFromFileFormat:[MediaUtils formatFromString:format]];
@@ -320,7 +369,79 @@
 }
 
 
+#pragma mark - image and color
+// http://stackoverflow.com/questions/16768739/how-to-detect-image-is-grayscale
+- (BOOL)isGrayScaleImage:(UIImage *)image{
+    
+    @autoreleasepool {
+        
+        CGImageRef imageRef = [image CGImage];
+        CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);
+        
+        if (CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelRGB)
+        {
+            
+            CGDataProviderRef dataProvider = CGImageGetDataProvider(imageRef);
+            CFDataRef imageData = CGDataProviderCopyData(dataProvider);
+            const UInt8 *rawData = CFDataGetBytePtr(imageData);
+            
+            size_t width = CGImageGetWidth(imageRef);
+            size_t height = CGImageGetHeight(imageRef);
+            
+            int byteIndex = 0;
+            BOOL allPixelsGrayScale = YES;
+            for(int ii = 0 ; ii <width*height; ++ii)
+            {
+                int r = rawData[byteIndex];
+                int g = rawData[byteIndex+1];
+                int b = rawData[byteIndex+2];
+                if (!((r == g)&&(g == b))) {
+                    allPixelsGrayScale = NO;
+                    break;
+                }
+                byteIndex += 4;
+            }
+            
+            return allPixelsGrayScale;
+        }
+        else if (CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelMonochrome)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    
+}
 
 
+//http://stackoverflow.com/questions/13694618/objective-c-getting-least-used-and-most-used-color-in-a-image
+- (UIColor *)averageColor:(UIImage *)image {
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    unsigned char rgba[4];
+    CGContextRef context = CGBitmapContextCreate(rgba, 1, 1, 8, 4, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    
+    CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), image.CGImage);
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(context);
+    
+    if(rgba[3] > 0) {
+        CGFloat alpha = ((CGFloat)rgba[3])/255.0;
+        CGFloat multiplier = alpha/255.0;
+        return [UIColor colorWithRed:((CGFloat)rgba[0])*multiplier
+                               green:((CGFloat)rgba[1])*multiplier
+                                blue:((CGFloat)rgba[2])*multiplier
+                               alpha:alpha];
+    }
+    else {
+        return [UIColor colorWithRed:((CGFloat)rgba[0])/255.0
+                               green:((CGFloat)rgba[1])/255.0
+                                blue:((CGFloat)rgba[2])/255.0
+                               alpha:((CGFloat)rgba[3])/255.0];
+    }
+}
 
 @end
